@@ -32,6 +32,8 @@ if (process.platform === "darwin") {
   });
 }
 
+let mainWindow;
+
 autoUpdater.on("error", error => {
   dialog.showErrorBox(
     "Error: ",
@@ -48,27 +50,20 @@ autoUpdater.on("error", error => {
 // });
 
 autoUpdater.on("update-available", () => {
-  dialog.showMessageBox(
-    {
-      type: "info",
-      title: "Found Updates",
-      message:
-        "Found updates, Going to download them now. Your window will close when the update is ready to install.",
-      buttons: ["Okay"]
-    },
-    buttonIndex => {
-      if (buttonIndex === 0) {
-        autoUpdater.downloadUpdate();
-      }
-    }
-  );
+  mainWindow.close();
+  autoUpdater.downloadUpdate();
+  dialog.showMessageBox({
+    type: "info",
+    title: "Found Updates",
+    message: "There are updates available, downloading them now..."
+  });
 });
 
 autoUpdater.on("update-downloaded", info => {
   dialog.showMessageBox(
     {
       title: "Installing Updates",
-      message: "Updates downloaded, application will restart to update..."
+      message: "Updates downloaded, Click Okay to restart :)"
     },
     () => {
       setImmediate(() => autoUpdater.quitAndInstall());
@@ -78,13 +73,15 @@ autoUpdater.on("update-downloaded", info => {
 
 // Prepare the renderer once the app is ready
 app.on("ready", async () => {
-  autoUpdater.checkForUpdates();
+  if (!isDev) {
+    autoUpdater.checkForUpdates();
+  }
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
   await prepareNext("./renderer");
 
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600
   });
