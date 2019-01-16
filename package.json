@@ -1,10 +1,10 @@
 {
   "name": "alumi-guard-hub",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "main/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aaronholla/alumi-guard-hub"
+    "url": "https://github.com/Alumi-Guard/hub"
   },
   "scripts": {
     "start": "electron .",
