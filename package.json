@@ -1,0 +1,51 @@
+{
+  "name": "alumi-guard-hub",
+  "version": "0.1.0",
+  "main": "main/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaronholla/alumi-guard-hub"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "next build renderer && next export renderer",
+    "dist": "yarn run build && electron-builder -mw",
+    "release": "build --mac --win -p always"
+  },
+  "build": {
+    "appId": "com.barrette.hub",
+    "productName": "Alumi-Guard Hub",
+    "copyright": "Copyright © 2019 Barrette Outdoor Living",
+    "files": [
+      "**/*",
+      "!renderer",
+      "renderer/out"
+    ]
+  },
+  "mac": {
+    "publish": {
+      "provider": "github"
+    }
+  },
+  "win": {
+    "publish": {
+      "provider": "github"
+    }
+  },
+  "devDependencies": {
+    "electron": "^3.0.10",
+    "electron-builder": "^20.38.4",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "dotenv": "^6.2.0",
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^2.2.17",
+    "electron-next": "^3.1.5",
+    "electron-updater": "^4.0.6",
+    "evergreen-ui": "^4.8.0"
+  }
+}
