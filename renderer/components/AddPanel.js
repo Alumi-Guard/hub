@@ -102,7 +102,7 @@ export default class extends Component {
 
   render() {
     return (
-      <Pane>
+      <Pane float="left">
         <Dialog
           isShown={this.state.isShown}
           title="Add Panel"
@@ -172,7 +172,10 @@ export default class extends Component {
           </Pane>
         </Dialog>
 
-        <Button onClick={() => this.setState({ isShown: true })}>
+        <Button
+          marginRight={25}
+          onClick={() => this.setState({ isShown: true })}
+        >
           Add Panel
         </Button>
       </Pane>

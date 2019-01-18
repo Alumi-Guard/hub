@@ -41,16 +41,24 @@ export default class extends Component {
   render() {
     return (
       <Page>
-        <AddPanel addItem={this.addItem} />
-        <AddGate addItem={this.addItem} />
-        <ul>
-          {this.state.items.map(item => (
-            <li>
-              {item.type} {item.grade} {item.width} {item.finialCount}{" "}
-              {item.qty}
-            </li>
-          ))}
-        </ul>
+        <Pane
+          width="100%"
+          display="flex"
+          marginTop={65}
+          height={50}
+          backgroundColor="#fff"
+          position="fixed"
+          top={0}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <AddPanel addItem={this.addItem} marginRight={minorScale(3)} />
+          <AddGate addItem={this.addItem} />
+        </Pane>
+        <Pane marginTop={100}>
+          <ItemList items={this.state.items} />
+          <FinialList finials={this.state.finials} />
+        </Pane>
       </Page>
     );
   }

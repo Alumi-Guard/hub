@@ -5,7 +5,16 @@ import { Pane, Button, Heading } from "evergreen-ui";
 export default class extends Component {
   render() {
     return (
-      <Pane display="flex" padding={16} margin={0} background="tint1">
+      <Pane
+        display="flex"
+        padding={16}
+        margin={0}
+        background="tint1"
+        position="fixed"
+        top={0}
+        height={77}
+        width="100%"
+      >
         <Pane>
           <Heading size={500}>Finial</Heading>
           <Heading size={500}>Calculator</Heading>

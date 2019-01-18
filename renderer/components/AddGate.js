@@ -199,7 +199,10 @@ export default class extends Component {
           </Pane>
         </Dialog>
 
-        <Button onClick={() => this.setState({ isShown: true })}>
+        <Button
+          marginLeft={25}
+          onClick={() => this.setState({ isShown: true })}
+        >
           Add Single Gate
         </Button>
       </Pane>
