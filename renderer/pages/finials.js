@@ -1,20 +1,23 @@
 import React, { Component } from "react";
-import { Table } from "evergreen-ui";
+import { Pane, minorScale } from "evergreen-ui";
 import Page from "../layouts/main";
 import AddPanel from "../components/AddPanel";
 import AddGate from "../components/AddGate";
+import ItemList from "../components/ItemList";
+import FinialList from "../components/FinialList";
+import finials from "../data/finials";
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      finials: []
     };
   }
 
   addItem = (type, grade, width, finialCount) => {
     var newItems;
-    console.log("addItem", grade, width, finialCount);
     // check array if item already there if so bump the qty++
     const itemcheck = this.state.items.findIndex(item => {
       return (
@@ -36,6 +39,34 @@ export default class extends Component {
     }
 
     this.setState({ items: newItems });
+    this.addFinial(grade.toUpperCase(), "QUAD", "BLACK", finialCount);
+  };
+
+  addFinial = (grade, type, color, count) => {
+    let newFinials;
+    // find finial number with properties
+    const finialCheck = finials.filter(finial => {
+      return (
+        finial.grade === grade && finial.type === type && finial.color === color
+      );
+    });
+
+    if (finialCheck) {
+      newFinials = [
+        ...this.state.finials,
+        {
+          number: finialCheck[0].number,
+          description: finialCheck[0].description,
+          color,
+          count
+        }
+      ];
+    }
+
+    // check if finial with same number is in state, if so add to quantity for that item
+    // If not in state append onto the end of the state
+
+    this.setState({ finials: newFinials });
   };
 
   render() {
